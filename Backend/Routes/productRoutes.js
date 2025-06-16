@@ -65,6 +65,7 @@ router.post("/", protect, admin, async (req, res) => {
 //@route PUT /api/products/:id
 //@desc Update a product in the database
 //@access Private (only admin can update a product)
+// PUT /api/products/:id
 router.put("/:id", protect, admin, async (req, res) => {
   try {
     const {
@@ -87,42 +88,55 @@ router.put("/:id", protect, admin, async (req, res) => {
       dimensions,
       weight,
       sku,
+      rating,
+      numReviews,
     } = req.body;
-    // fidn the product by id
+
     const product = await Product.findById(req.params.id);
-    if (product) {
-      product.name = name || product.name;
-      product.description = description || product.description;
-      product.price = price || product.price;
-      product.discountPrice = discountPrice || product.discountPrice;
-      product.countInStock = countInStock || product.countInStock;
-      product.category = category || product.category;
-      product.anime = anime || product.anime;
-      product.sizes = sizes || product.sizes;
-      product.colors = colors || product.colors;
-      product.collections = collections || product.collections;
-      product.material = material || product.material;
-      product.gender = gender || product.gender;
-      product.images = images || product.images;
-      product.isFeatured =
-        isFeatured !== undefined ? isFeatured : product.isFeatured;
-      product.isPublished =
-        isPublished !== undefined ? isPublished : product.isPublished;
-      product.tags = tags || product.tags;
-      product.dimensions = dimensions || product.dimensions;
-      product.weight = weight || product.weight;
-      product.sku = sku || product.sku;
-      // save the product
-      const updatedProduct = await product.save();
-      res.status(200).json(updatedProduct);
-    } else {
-      res.status(404).json({ message: "Product not found" });
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
     }
+
+    // Consolidated update logic
+    const fieldsToUpdate = {
+      name,
+      description,
+      price,
+      discountPrice,
+      countInStock,
+      category,
+      anime,
+      sizes,
+      colors,
+      collections,
+      material,
+      gender,
+      images,
+      isFeatured,
+      isPublished,
+      tags,
+      dimensions,
+      weight,
+      sku,
+      rating,
+      numReviews,
+    };
+
+    Object.entries(fieldsToUpdate).forEach(([key, value]) => {
+      if (value !== undefined) {
+        product[key] = value;
+      }
+    });
+
+    const updatedProduct = await product.save();
+    res.status(200).json(updatedProduct);
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Server Error");
+    console.error("Error updating product:", error);
+    res.status(500).json({ message: "Server Error" });
   }
 });
+
 
 // Now i will work upon the deleting the product
 // @route DELETE /api/products/:id

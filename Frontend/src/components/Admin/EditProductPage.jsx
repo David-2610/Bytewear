@@ -14,6 +14,7 @@ function EditProductPage() {
 		name: "",
 		description: "",
 		price: 0,
+		discountPrice: 0,
 		countInStock: 0,
 		sku: "",
 		category: "",
@@ -23,6 +24,8 @@ function EditProductPage() {
 		collections: "",
 		material: "",
 		gender: "",
+		rating: 0,
+		numReviews: 0,
 		images: [],
 	});
 
@@ -80,16 +83,18 @@ function EditProductPage() {
 			<h2 className="text-3xl font-bold mb-6 text-gray-800">Edit Product</h2>
 			<form onSubmit={handleSubmit} className="space-y-6">
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-					{/* Field Groups */}
 					{[
 						["name", "Product Name", "text"],
-						["price", "Price", "number"],
-						["countInStock", "Available Units", "number"],
 						["sku", "SKU", "text"],
+						["price", "Price", "number"],
+						["discountPrice", "Discount Price", "number"],
+						["countInStock", "Stock Count", "number"],
 						["category", "Category", "text"],
 						["anime", "Anime", "text"],
 						["collections", "Collections", "text"],
 						["material", "Material", "text"],
+						["rating", "Rating", "number"],
+						["numReviews", "Number of Reviews", "number"],
 						["gender", "Gender", "text"],
 					].map(([name, label, type]) => (
 						<div key={name}>
@@ -97,7 +102,7 @@ function EditProductPage() {
 							<input
 								type={type}
 								name={name}
-								value={productData[name] || ""}
+								value={productData[name] ?? ""}
 								onChange={handleChange}
 								className="w-full border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
 							/>
