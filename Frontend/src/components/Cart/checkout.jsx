@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { createCheckout } from "../../redux/slices/checkoutSlice";
 import axios from "axios";
+import { clearCart } from "../redux/slices/cartSlice";
 
 const Checkout = () => {
 	const navigate = useNavigate();
@@ -64,7 +65,11 @@ const Checkout = () => {
 			);
 			if (response.status === 200){
 			
-				await handleFinalizeCheckout(checkoutId);}
+				await handleFinalizeCheckout(checkoutId);
+				dispatch(clearCart()); // Clear cart after successful payment
+				
+			
+			}
 			else {
 				console.error("Error while updating payment status");
 			}
