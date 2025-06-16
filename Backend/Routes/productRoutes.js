@@ -18,7 +18,7 @@ router.post("/", protect, admin, async (req, res) => {
       discountPrice,
       countInStock,
       category,
-      brand,
+      anime,
       sizes,
       colors,
       collections,
@@ -39,7 +39,7 @@ router.post("/", protect, admin, async (req, res) => {
       discountPrice,
       countInStock,
       category,
-      brand,
+      anime,
       sizes,
       colors,
       collections,
@@ -74,7 +74,7 @@ router.put("/:id", protect, admin, async (req, res) => {
       discountPrice,
       countInStock,
       category,
-      brand,
+      anime,
       sizes,
       colors,
       collections,
@@ -97,7 +97,7 @@ router.put("/:id", protect, admin, async (req, res) => {
       product.discountPrice = discountPrice || product.discountPrice;
       product.countInStock = countInStock || product.countInStock;
       product.category = category || product.category;
-      product.brand = brand || product.brand;
+      product.anime = anime || product.anime;
       product.sizes = sizes || product.sizes;
       product.colors = colors || product.colors;
       product.collections = collections || product.collections;
@@ -161,7 +161,7 @@ router.get("/", async (req, res) => {
       search,
       category,
       material,
-      brand,
+      anime,
       limit,
     } = req.query;
     let query = {};
@@ -175,8 +175,8 @@ router.get("/", async (req, res) => {
     if (material) {
       query.material = { $in: material.split(",") };
     }
-    if (brand) {
-      query.brand = { $in: brand.split(",") };
+    if (anime) {
+      query.anime = { $in: anime.split(",") };
     }
     if (size) {
       query.sizes = { $in: size.split(",") };
@@ -296,25 +296,29 @@ router.get("/similar/:id", async (req, res) => {
   if (!id) {
     return res.status(400).json({ message: "Product ID is required" });
   }
-  // Find the product by ID to get its category
+
   try {
+    // Find the product by ID to get its category, gender, and anime
     const product = await Product.findById(id);
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
-    // Find similar products in the same category, excluding the current product
+
+    // Find similar products with matching category, gender, and anime (excluding the current product)
     const similarProducts = await Product.find({
-      category: product.category,
       _id: { $ne: id },
-      gender: product.gender,
       category: product.category,
+      gender: product.gender,
+      anime: product.anime
     }).limit(4);
+
     res.status(200).json(similarProducts);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
   }
 });
+
 
 
 });

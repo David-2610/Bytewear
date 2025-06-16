@@ -264,9 +264,9 @@ function ProductDetails({ productId }) {
 								<table className="w-full text-sm text-left text-gray-600">
 									<tbody>
 										<tr>
-											<td className="py-2">Brand</td>
+											<td className="py-2">anime</td>
 											<td className="py-2">
-												{selectedProduct.brand}
+												{selectedProduct.anime}
 											</td>
 										</tr>
 										<tr>

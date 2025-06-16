@@ -11,7 +11,7 @@ function FilterSidebar() {
         color: "",
         size: [],
         material: [],
-        brand: [],
+        anime: [],
         minPrice:0,
         maxPrice:100,
     });
@@ -22,7 +22,24 @@ function FilterSidebar() {
     const colors = ["Red", "Blue", "Black", "Green", "Yellow", "Gray", "White", "Pink", "Beige", "Navy"];
     const sizes = ["XS", "S", "M", "L", "XL", "XXL"];
     const materials = ["Cotton", "Wool", "Denim", "Polyester", "Silk", "Linen", "Viscose", "Fleece"];
-    const brands = ["Urban Threads", "Modern Fit", "Street Style", "Beach Breeze", "Fashionista", "ChicStyle"];
+    const anime = [
+        "Naruto",
+        "One Piece",
+        "Bleach",
+        "Attack on Titan",
+        "Demon Slayer",
+        "Jujutsu Kaisen",
+        "My Hero Academia",
+        "Re:Zero",
+        "Tokyo Revengers",
+        "Hunter x Hunter",
+        "Fullmetal Alchemist",
+        "Death Note",
+        "Dragon Ball Z",
+        "Sword Art Online",
+        "Chainsaw Man"
+      ];
+      
     const genders = ["Men", "Women"]
 
     useEffect(() => {
@@ -34,7 +51,7 @@ function FilterSidebar() {
             color: params.color || "",
             size: params.size ? params.size.split(",") : [],
             material: params.material ? params.material.split(",") : [],
-            brand: params.brand ? params.brand.split(",") : [],
+            anime: params.anime ? params.anime.split(",") : [],
             minPrice: Number(params.minPrice )|| 0,
             maxPrice: Number(params.maxPrice) || 100,
         });
@@ -144,13 +161,13 @@ function FilterSidebar() {
             ))}
             </div>
 
-            {/* Brand Filter */}
+            {/* anime Filter */}
              <div className="mb-6">
-            <label className="block text-gray-600 font-medium mb-2">Brand</label>
-            {brands.map((brand) => (
-                <div key={brand} className="flex items-center mb-1">
-                    <input type="checkbox" name="brand" value={brand} onChange={handleFilterChange} checked={filters.brand.includes(brand)} className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300" />
-                    <span>{brand}</span>
+            <label className="block text-gray-600 font-medium mb-2">anime</label>
+            {anime.map((anime) => (
+                <div key={anime} className="flex items-center mb-1">
+                    <input type="checkbox" name="anime" value={anime} onChange={handleFilterChange} checked={filters.anime.includes(anime)} className="mr-2 h-4 w-4 text-blue-500 focus:ring-blue-400 border-gray-300" />
+                    <span>{anime}</span>
                 </div>
             ))}
             </div>

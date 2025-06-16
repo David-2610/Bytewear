@@ -17,7 +17,7 @@ export const fetchProductsByFilters = createAsyncThunk(
     search,
     category,
     material,
-    brand,
+    anime,
     limit,
   }) => {
     const query = new URLSearchParams();
@@ -31,7 +31,7 @@ export const fetchProductsByFilters = createAsyncThunk(
     if (search) query.append("search", search);
     if (category) query.append("category", category);
     if (material) query.append("material", material);
-    if (brand) query.append("brand", brand);
+    if (anime) query.append("anime", anime);
     if (limit) query.append("limit", limit);
 
     const response = await axios.get(
@@ -124,7 +124,7 @@ const productsSlice = createSlice({
       size: "",
       color: "",
       gender: "",
-      brand: "",
+      anime: "",
       material: "",
       minPrice: "",
       maxPrice: "",
@@ -144,7 +144,7 @@ const productsSlice = createSlice({
         size: "",
         color: "",
         gender: "",
-        brand: "",
+        anime: "",
         material: "",
         minPrice: "",
         maxPrice: "",

@@ -19,7 +19,7 @@ function EditProductPage() {
         countInStock:0,
         sku: "",
         category:"",
-        brand:"",
+        anime:"",
         sizes:[],
         colors:[],
         collections:"",
