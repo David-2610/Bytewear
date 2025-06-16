@@ -38,7 +38,11 @@ Bytewear is a modern, anime-themed ecommerce platform built with the **MERN stac
 - Password hashing using bcryptjs
 
 ---
-
+## For Admin Login 
+---
+Email - Admin@gmail.com
+Password - Admin@25
+---
 ## 📦 Features
 
 - 🛍️ Browse anime-themed products
