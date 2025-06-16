@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { createCheckout } from "../../redux/slices/checkoutSlice";
 import axios from "axios";
-import { clearCart } from "../redux/slices/cartSlice";
+import { clearCart } from "../../redux/slices/cartSlice";
 
 const Checkout = () => {
 	const navigate = useNavigate();
