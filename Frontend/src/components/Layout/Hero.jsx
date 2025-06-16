@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import heroimage from "../../assets/rabbit-hero.webp";
+import heroimage from "../../assets/rabbit-hero.jpg";
 const Hero = () => {
 	return (
 		<section className="relative">
@@ -11,10 +11,10 @@ const Hero = () => {
 			<div className="absolute inset-0 bg-black/15 flex items-center justify-center">
 				<div className="text-center text-white p-6">
 					<h1 className="text-4xl md:text-9xl font-bold tracking-tighter uppercase mb-4">
-						vacation
+					Ascend
 					</h1>
 					<p className="text-sm tracking-tighter md:text-lg mb-6">
-						Explore our vacation ready outfits with fast woridwide shipping.
+					Join a world where legends rise, battles ignite, and destiny awaits
 					</p>
 					<Link
 						to="/collections/all"
